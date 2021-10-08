@@ -4,7 +4,7 @@ import "./App.css";
 import Loader from "./components/utils/Loader";
 import { ROUTES } from "./constants";
 import UserContext from "./context/user";
-import useAuthListener from "./Hooks/uesAuthListener";
+import useAuthListener from "./hooks/uesAuthListener";
 
 const Login = lazy(() => import("./pages/login"));
 const Signup = lazy(() => import("./pages/signup"));
