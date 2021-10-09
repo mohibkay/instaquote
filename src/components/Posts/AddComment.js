@@ -54,7 +54,7 @@ export default function AddComment({
             !comment && "opacity-25 cursor-default"
           }`}
         >
-          Post
+          Comment
         </button>
       </form>
     </div>
