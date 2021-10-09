@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export default function NotFound() {
   useEffect(() => {
-    document.title = "Not Found - Instagram";
+    document.title = "Not Found - InstaQuote";
   }, []);
 
   return (

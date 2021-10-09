@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    document.title = "Login - Pixygram";
+    document.title = "Login - InstaQuote";
   }, []);
 
   return (
