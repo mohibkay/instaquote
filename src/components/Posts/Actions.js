@@ -44,7 +44,7 @@ export default function Actions({
               }
             }}
             xmlns="http://www.w3.org/2000/svg"
-            className={`w-8 select-none cursor-pointer focus:outline-none ${
+            className={`w-6 select-none cursor-pointer focus:outline-none ${
               toggleLiked ? "fill-red text-red-primary" : "text-black-light"
             }`}
             fill="none"
@@ -68,7 +68,7 @@ export default function Actions({
               }
             }}
             xmlns="http://www.w3.org/2000/svg"
-            className="w-8 select-none cursor-pointer text-black-light focus:outline-none"
+            className="w-6 select-none cursor-pointer text-black-light focus:outline-none"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
