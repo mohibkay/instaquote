@@ -39,8 +39,8 @@ export default function CreatePost({
 
         <TextareaAutosize
           minRows="2"
-          placeholder="Create Post"
-          className="p-1 w-full outline-none inline-block"
+          placeholder="Share Quote"
+          className="p-1 w-full outline-none inline-block text-xl"
           value={text}
           onChange={({ target }) => setText(target.value)}
         />
