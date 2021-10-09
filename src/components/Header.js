@@ -19,9 +19,9 @@ export default function Header() {
       <div className="container max-w-screen-lg mx-auto h-full">
         <div className="flex justify-between h-full px-4 md:px-0">
           <div className="flex items-center text-center text-gray-700 cursor-pointer">
-            <h1 className="flex justify-center w-full">
+            <h1 className="flex justify-center w-full font-bold text-xl">
               <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
-                Pixygram
+                InstaQuote
               </Link>
             </h1>
           </div>
