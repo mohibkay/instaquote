@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Header from "./Header";
 // import Image from "./Image";
@@ -22,6 +22,7 @@ export default function Post({ content }) {
 
   const commentInput = useRef(null);
   const handleFocus = () => commentInput.current.focus();
+  const [totalComments, setTotalComments] = useState(comments.length);
 
   return (
     <div className="bg-white border-t border-b md:border border-gray-primary rounded mb-12">
@@ -33,6 +34,7 @@ export default function Post({ content }) {
         totalLikes={likes.length}
         likedPhoto={loggedInUserLikedPhoto}
         handleFocus={handleFocus}
+        totalComments={totalComments}
       />
       {/* <Footer username={username} caption={caption} /> */}
       <Comments
@@ -40,6 +42,7 @@ export default function Post({ content }) {
         comments={comments}
         posted={dateCreated}
         commentInput={commentInput}
+        setTotalComments={setTotalComments}
       />
     </div>
   );

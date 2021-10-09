@@ -9,8 +9,10 @@ export default function Comments({
   comments: allComments,
   posted,
   commentInput,
+  setTotalComments,
 }) {
   const [comments, setComments] = useState(allComments);
+
   return (
     <>
       <div className="p-4 pt-0">
@@ -33,6 +35,7 @@ export default function Comments({
         comments={comments}
         setComments={setComments}
         commentInput={commentInput}
+        setTotalComments={setTotalComments}
       />
     </>
   );

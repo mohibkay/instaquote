@@ -8,6 +8,7 @@ export default function AddComment({
   comments,
   setComments,
   commentInput,
+  setTotalComments,
 }) {
   const [comment, setComment] = useState("");
   const { firebase, FieldValue } = useContext(FirebaseContext);
@@ -20,6 +21,7 @@ export default function AddComment({
 
     setComments([{ displayName, comment }, ...comments]);
     setComment("");
+    setTotalComments((comments) => comments + 1);
 
     return firebase
       .firestore()
@@ -40,7 +42,7 @@ export default function AddComment({
         <input
           type="text"
           aria-label="Add a comment"
-          className="w-full text-sm text-gray-base p-4 focus: outline-none"
+          className="w-full text-sm text-gray-base px-4 py-2.5 focus: outline-none"
           placeholder="Add a comment..."
           value={comment}
           onChange={({ target }) => setComment(target.value)}
