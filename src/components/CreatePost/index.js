@@ -20,7 +20,7 @@ export default function CreatePost({
       dateCreated: Date.now(),
     };
 
-    setPosts([postObj, ...posts]);
+    setPosts([{ ...postObj, username }, ...posts]);
     setText("");
 
     try {

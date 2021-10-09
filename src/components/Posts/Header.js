@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function Header({ username, fullName }) {
+export default function Header({ username }) {
   return (
     <div className="flex border-gray-primary h-4 px-4 py-5">
       <Link to={`/p/${username}`} className="flex items-center space-x-4">

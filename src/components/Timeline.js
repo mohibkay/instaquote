@@ -7,9 +7,6 @@ import Post from "./Posts";
 export default function Timeline({ photos }) {
   const [posts, setPosts] = useState(photos);
 
-  console.log("timeline  - hotos");
-  console.log(photos);
-
   useEffect(() => {
     if (photos?.length) {
       setPosts(photos);
