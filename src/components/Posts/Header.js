@@ -11,8 +11,8 @@ export default function Header({ username, fullName }) {
           className="rounded-full w-8 h-8"
         /> */}
 
-        <div className="uppercase bg-blue-medium inline-block h-8 w-8 text-center px-2 rounded-full text-xl text-white font-bold ml-2">
-          {"fullName"?.[0]}
+        <div className="uppercase bg-blue-medium h-6 w-6 text-center px-2 rounded-full text-sm text-white font-bold ml-2 flex justify-center items-center">
+          <p>{username?.[0]}</p>
         </div>
         <p className="font-bold">{username}</p>
       </Link>
