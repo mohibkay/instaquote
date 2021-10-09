@@ -36,7 +36,7 @@ export default function Login() {
       </div>
       <div className="flex flex-col w-full md:w-2/5">
         <div className="flex flex-col bg-white py-2 border border-gray-primary mb-4">
-          <h1 className="flex justify-center w-full p-4">Pixygram</h1>
+          <h1 className="flex justify-center w-full p-4">InstaQuote</h1>
 
           {error && (
             <p className="text-xs mb-4 text-red-primary px-4">{error}</p>
