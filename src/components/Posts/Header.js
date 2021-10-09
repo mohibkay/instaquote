@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export default function Header({ username }) {
+export default function Header({ username, handleDeletePost, docId }) {
   return (
-    <div className="flex border-gray-primary h-4 px-3 py-5 pt-7">
+    <div className="flex justify-between items-start border-gray-primary h-4 px-3 py-5 pt-7">
       <Link to={`/p/${username}`} className="flex items-center space-x-4">
         {/* <img
           src={`/images/avatars/${username}.jpg`}
@@ -16,6 +16,8 @@ export default function Header({ username }) {
         </div>
         <p className="font-bold">{username}</p>
       </Link>
+
+      <button onClick={() => handleDeletePost(docId)}>del</button>
     </div>
   );
 }

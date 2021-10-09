@@ -7,7 +7,7 @@ import Actions from "./Actions";
 import Comments from "./Comments";
 import Content from "./Content";
 
-export default function Post({ content }) {
+export default function Post({ content, handleDeletePost }) {
   const {
     username,
     fullName,
@@ -26,7 +26,12 @@ export default function Post({ content }) {
 
   return (
     <div className="bg-white border-t border-b md:border border-gray-primary rounded mb-12">
-      <Header username={username} fullName={fullName} />
+      <Header
+        username={username}
+        fullName={fullName}
+        handleDeletePost={handleDeletePost}
+        docId={docId}
+      />
       {/* <Image src={imageSrc} caption={caption} /> */}
       <Content content={caption} />
       <Actions
