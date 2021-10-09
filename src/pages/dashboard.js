@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Timeline from "../components/Timeline";
-import usePhotos from "../hooks/usePhotos";
+import usePhotos from "../customHooks/usePhotos";
 
 export default function Dashboard() {
   const { photos } = usePhotos();

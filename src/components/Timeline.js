@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import useUser from "../hooks/useUser";
+import useUser from "../customHooks/useUser";
 import CreatePost from "./CreatePost";
 import Post from "./Posts";
 import { firebase } from "../lib/firebase";

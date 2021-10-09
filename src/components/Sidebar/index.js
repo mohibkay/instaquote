@@ -1,4 +1,4 @@
-import useUser from "../../hooks/useUser";
+import useUser from "../../customHooks/useUser";
 import User from "./User";
 import Suggestions from "./Suggestions";
 
