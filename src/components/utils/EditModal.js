@@ -11,8 +11,6 @@ export default function EditModal({
   postId,
   handleUpdate,
 }) {
-  console.log("post");
-  console.log(post, postId);
   let subtitle;
 
   function afterOpenModal() {

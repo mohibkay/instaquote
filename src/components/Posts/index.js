@@ -9,7 +9,12 @@ import Content from "./Content";
 // import Image from "./Image";
 // import Footer from "./Footer";
 
-export default function Post({ content, handleDeletePost, handleUpdatePost }) {
+export default function Post({
+  content,
+  currentUser,
+  handleDeletePost,
+  handleUpdatePost,
+}) {
   const {
     username,
     fullName,
@@ -33,6 +38,7 @@ export default function Post({ content, handleDeletePost, handleUpdatePost }) {
         fullName={fullName}
         docId={docId}
         caption={caption}
+        currentUser={currentUser}
         handleDeletePost={handleDeletePost}
         handleUpdatePost={handleUpdatePost}
       />

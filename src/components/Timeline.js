@@ -67,6 +67,7 @@ export default function Timeline({ photos }) {
             content={content}
             handleDeletePost={handleDeletePost}
             handleUpdatePost={handleUpdatePost}
+            currentUser={username}
           />
         ))
       ) : (

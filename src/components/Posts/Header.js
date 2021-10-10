@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DeleteModal from "../utils/DeleteModal";
 import MenuList from "../utils/Menu";
 import EditModal from "../utils/EditModal";
+import MountFor from "../auth/MountFor";
 
 export default function Header({
   username,
@@ -11,10 +12,13 @@ export default function Header({
   caption,
   handleDeletePost,
   handleUpdatePost,
+  currentUser,
 }) {
   const [deleteModalStatus, setDeleteModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
   const [post, setPost] = useState(caption);
+
+  const allowMount = currentUser === username;
 
   return (
     <div className="flex justify-between items-start border-gray-primary h-4 px-3 py-5 pt-7">
@@ -31,10 +35,12 @@ export default function Header({
         <p className="font-bold">{username}</p>
       </Link>
 
-      <MenuList
-        setModalStatus={setDeleteModalStatus}
-        setShowEditModal={setEditModalStatus}
-      />
+      <MountFor allowMount={allowMount}>
+        <MenuList
+          setModalStatus={setDeleteModalStatus}
+          setShowEditModal={setEditModalStatus}
+        />
+      </MountFor>
 
       <DeleteModal
         modalStatus={deleteModalStatus}
