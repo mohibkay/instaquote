@@ -34,7 +34,7 @@ export default function EditModal({
         isOpen={modalStatus}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
-        className="modal"
+        className="modal md:w-1/3"
         contentLabel="Edit Post Modal"
       >
         <div className="flex justify-between mb-4">
