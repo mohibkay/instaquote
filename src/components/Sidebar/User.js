@@ -12,7 +12,7 @@ export default function User({ username, fullName }) {
         alt={`${username} profile`}
         className="h-16 w-16 rounded-full"
       /> */}
-      <div className="uppercase bg-blue-medium h-12 w-12 text-center px-2 rounded-full text-4xl text-white font-bold ml-2 flex justify-center items-center">
+      <div className="uppercase bg-blue-medium h-12 w-12 text-center px-2 rounded-full text-3xl text-white font-bold flex justify-center items-center">
         <p>{username?.[0]}</p>
       </div>
       <div className="-space-y-1">

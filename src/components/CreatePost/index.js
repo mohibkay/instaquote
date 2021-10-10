@@ -33,7 +33,7 @@ export default function CreatePost({
   return (
     <div className="border border-gray-primary mb-8 p-2 rounded pt-3">
       <div className="flex">
-        <div className="uppercase bg-blue-medium h-10 w-10 text-center px-2 rounded-full text-3xl text-white font-bold mr-4 ml-2 flex justify-center items-center">
+        <div className="uppercase bg-blue-medium h-10 w-10 text-center px-2 rounded-full text-2xl text-white font-bold mr-4 ml-2 flex justify-center items-center">
           <p>{fullName?.[0]}</p>
         </div>
 
