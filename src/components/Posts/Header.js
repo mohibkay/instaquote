@@ -1,7 +1,13 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import DeleteModal from "../utils/DeleteModal";
+import MenuList from "../utils/Menu";
 
 export default function Header({ username, handleDeletePost, docId }) {
+  const [deleteModalStatus, setDeleteModalStatus] = useState(false);
+  const [editModalStatus, setEditModalStatus] = useState(false);
+
   return (
     <div className="flex justify-between items-start border-gray-primary h-4 px-3 py-5 pt-7">
       <Link to={`/p/${username}`} className="flex items-center space-x-4">
@@ -17,7 +23,20 @@ export default function Header({ username, handleDeletePost, docId }) {
         <p className="font-bold">{username}</p>
       </Link>
 
-      <button onClick={() => handleDeletePost(docId)}>del</button>
+      {/* <button onClick={() => handleDeletePost(docId)}>del</button> */}
+      <MenuList
+        setModalStatus={setDeleteModalStatus}
+        setShowEditModal={"setShowEditModal"}
+        type={100}
+      />
+
+      <DeleteModal
+        modalStatus={deleteModalStatus}
+        setModalStatus={setDeleteModalStatus}
+        handleDeletePost={handleDeletePost}
+        postId={docId}
+        title={"project"}
+      />
     </div>
   );
 }
