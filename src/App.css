@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #2ec4b6;
+  --off-white: #f3f4f6;
+  --dark: #282828;
+  --dark-gray: #6b7280;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(102, 102, 102, 0.5) !important;
+  backdrop-filter: blur(5px);
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 100 !important;
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
+/*Menu Item  */
+.rc-menu__item--active {
+  color: white !important;
+  background-color: var(--primary-color) !important;
+}
