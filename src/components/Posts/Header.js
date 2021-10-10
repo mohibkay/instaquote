@@ -5,9 +5,16 @@ import DeleteModal from "../utils/DeleteModal";
 import MenuList from "../utils/Menu";
 import EditModal from "../utils/EditModal";
 
-export default function Header({ username, handleDeletePost, docId }) {
+export default function Header({
+  username,
+  docId,
+  caption,
+  handleDeletePost,
+  handleUpdatePost,
+}) {
   const [deleteModalStatus, setDeleteModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
+  const [post, setPost] = useState(caption);
 
   return (
     <div className="flex justify-between items-start border-gray-primary h-4 px-3 py-5 pt-7">
@@ -38,11 +45,12 @@ export default function Header({ username, handleDeletePost, docId }) {
       />
 
       <EditModal
+        post={post}
+        setPost={setPost}
+        postId={docId}
         modalStatus={editModalStatus}
         setModalStatus={setEditModalStatus}
-        // projectName={projectName}
-        // setProjectName={setProjectName}
-        // handleUpdate={handleUpdate}
+        handleUpdate={handleUpdatePost}
       />
     </div>
   );

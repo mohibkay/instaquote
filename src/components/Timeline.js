@@ -25,7 +25,27 @@ export default function Timeline({ photos }) {
       const updatedPosts = posts.filter((post) => post.docId !== postId);
       setPosts(updatedPosts);
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
+    }
+  };
+
+  const handleUpdatePost = async (postId, post) => {
+    try {
+      await firebase.firestore().collection("photos").doc(postId).update({
+        caption: post,
+        dateCreated: Date.now(),
+      });
+
+      const restOfThePosts = posts.filter((post) => post.docId !== postId);
+      const postToUpdate = posts.find((post) => post.docId === postId);
+      const updatedPost = {
+        ...postToUpdate,
+        caption: post,
+        dateCreated: Date.now(),
+      };
+      setPosts([updatedPost, ...restOfThePosts]);
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -46,6 +66,7 @@ export default function Timeline({ photos }) {
             key={content.docId}
             content={content}
             handleDeletePost={handleDeletePost}
+            handleUpdatePost={handleUpdatePost}
           />
         ))
       ) : (

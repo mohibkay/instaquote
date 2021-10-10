@@ -1,13 +1,15 @@
 import { useRef, useState } from "react";
 import PropTypes from "prop-types";
+
+// Components
 import Header from "./Header";
-// import Image from "./Image";
 import Actions from "./Actions";
-// import Footer from "./Footer";
 import Comments from "./Comments";
 import Content from "./Content";
+// import Image from "./Image";
+// import Footer from "./Footer";
 
-export default function Post({ content, handleDeletePost }) {
+export default function Post({ content, handleDeletePost, handleUpdatePost }) {
   const {
     username,
     fullName,
@@ -29,10 +31,11 @@ export default function Post({ content, handleDeletePost }) {
       <Header
         username={username}
         fullName={fullName}
-        handleDeletePost={handleDeletePost}
         docId={docId}
+        caption={caption}
+        handleDeletePost={handleDeletePost}
+        handleUpdatePost={handleUpdatePost}
       />
-      {/* <Image src={imageSrc} caption={caption} /> */}
       <Content content={caption} />
       <Actions
         docId={docId}
@@ -41,7 +44,6 @@ export default function Post({ content, handleDeletePost }) {
         handleFocus={handleFocus}
         totalComments={totalComments}
       />
-      {/* <Footer username={username} caption={caption} /> */}
       <Comments
         docId={docId}
         comments={comments}
@@ -49,6 +51,8 @@ export default function Post({ content, handleDeletePost }) {
         commentInput={commentInput}
         setTotalComments={setTotalComments}
       />
+      {/* <Image src={imageSrc} caption={caption} /> */}
+      {/* <Footer username={username} caption={caption} /> */}
     </div>
   );
 }
