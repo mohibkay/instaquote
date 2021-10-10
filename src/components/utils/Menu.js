@@ -1,7 +1,7 @@
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 
-export default function MenuList({ setModalStatus, setShowEditModal, type }) {
+export default function MenuList({ setModalStatus, setShowEditModal }) {
   const handleClick = (e) => e.stopPropagation();
 
   return (

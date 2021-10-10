@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import DeleteModal from "../utils/DeleteModal";
 import MenuList from "../utils/Menu";
+import EditModal from "../utils/EditModal";
 
 export default function Header({ username, handleDeletePost, docId }) {
   const [deleteModalStatus, setDeleteModalStatus] = useState(false);
@@ -23,11 +24,9 @@ export default function Header({ username, handleDeletePost, docId }) {
         <p className="font-bold">{username}</p>
       </Link>
 
-      {/* <button onClick={() => handleDeletePost(docId)}>del</button> */}
       <MenuList
         setModalStatus={setDeleteModalStatus}
-        setShowEditModal={"setShowEditModal"}
-        type={100}
+        setShowEditModal={setEditModalStatus}
       />
 
       <DeleteModal
@@ -35,7 +34,15 @@ export default function Header({ username, handleDeletePost, docId }) {
         setModalStatus={setDeleteModalStatus}
         handleDeletePost={handleDeletePost}
         postId={docId}
-        title={"project"}
+        title={"post"}
+      />
+
+      <EditModal
+        modalStatus={editModalStatus}
+        setModalStatus={setEditModalStatus}
+        // projectName={projectName}
+        // setProjectName={setProjectName}
+        // handleUpdate={handleUpdate}
       />
     </div>
   );
