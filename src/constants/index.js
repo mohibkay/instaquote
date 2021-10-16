@@ -5,3 +5,8 @@ export const ROUTES = {
   PROFILE: "/p/:username",
   NOT_FOUND: "*",
 };
+
+export const CREDENTIALS = {
+  email: "mohibk.in@gmail.com",
+  password: "falconnine",
+};

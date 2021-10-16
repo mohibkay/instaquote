@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
-import { ROUTES } from "../constants";
+import { ROUTES, CREDENTIALS } from "../constants";
 
 export default function Login() {
   const history = useHistory();
@@ -12,9 +12,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const isInvalid = password === "" || email === "";
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-
+  const login = async (email, password) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       history.push(ROUTES.DASHBOARD);
@@ -23,6 +21,17 @@ export default function Login() {
       setPassword("");
       setError(error.message);
     }
+  };
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    login(email, password);
+  };
+
+  const handleGuestLogin = async () => {
+    setEmail(CREDENTIALS.email);
+    setPassword(CREDENTIALS.password);
+    login(CREDENTIALS.email, CREDENTIALS.password);
   };
 
   useEffect(() => {
@@ -74,6 +83,12 @@ export default function Login() {
               Login
             </button>
           </form>
+          <button
+            onClick={handleGuestLogin}
+            className="border w-11/12 mx-auto rounded py-0.5"
+          >
+            Guest Login
+          </button>
         </div>
 
         <div className="flex justify-center bg-white border border-gray-primary">
