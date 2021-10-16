@@ -72,7 +72,7 @@ export default function Header() {
                   </svg>
                 </button>
 
-                <Link to={`/p/${user.displayName}`}>User</Link>
+                <Link to={`/p/${user.displayName}`}>{user.displayName}</Link>
               </>
             ) : (
               <div className="flex items-center space-x-4">
