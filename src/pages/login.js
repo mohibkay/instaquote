@@ -10,9 +10,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const isInvalid = password === "" || email === "";
 
   const login = async (email, password) => {
+    setIsLoading(true);
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       history.push(ROUTES.DASHBOARD);
@@ -20,6 +22,8 @@ export default function Login() {
       setEmail("");
       setPassword("");
       setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -74,7 +78,7 @@ export default function Login() {
             />
 
             <button
-              disabled={isInvalid}
+              disabled={isInvalid || isLoading}
               type="submit"
               className={`bg-blue-medium text-white w-full rounded h-8 py-1 mb-4 ${
                 isInvalid && "opacity-50"
@@ -84,6 +88,7 @@ export default function Login() {
             </button>
           </form>
           <button
+            disabled={isLoading}
             onClick={handleGuestLogin}
             className="border w-11/12 mx-auto rounded py-0.5"
           >
