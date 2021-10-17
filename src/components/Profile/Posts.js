@@ -4,18 +4,14 @@ import Skeleton from "react-loading-skeleton";
 import { deleteUserPost, updateUserPost } from "../../services/firebase";
 import Post from "../Posts";
 
-export default function Photos({ postsCollection, username, currentUser }) {
-  const [posts, setPosts] = useState(postsCollection);
+export default function Photos({ postsCollection, currentUser }) {
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (postsCollection?.length) {
       setPosts(postsCollection);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postsCollection?.length]);
-
-  console.log("postsCollection");
-  console.log(postsCollection);
+  }, [postsCollection]);
 
   const handleDeletePost = async (postId) => {
     try {
@@ -59,11 +55,10 @@ export default function Photos({ postsCollection, username, currentUser }) {
           />
         ) : posts.length > 0 ? (
           posts.map((photo) => {
-            const content = { ...photo, username };
             return (
               <Post
                 key={photo.docId}
-                content={content}
+                content={photo}
                 currentUser={currentUser}
                 handleDeletePost={handleDeletePost}
                 handleUpdatePost={handleUpdatePost}
