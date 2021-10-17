@@ -46,15 +46,13 @@ export default function Posts({ postsCollection, currentUser }) {
     }
   };
 
-  console.log(posts);
-
   return (
     <div className="border-t border-gray-primary mt-10">
       <span className="flex justify-center my-3 items-center space-x-1">
         <span className="uppercase">quotes</span>
       </span>
 
-      <div className="mb-8 w-full md:w-4/5 m-auto">
+      <div className="mb-6 w-full md:w-4/5 m-auto">
         {posts?.length > 0 ? (
           posts.map((photo) => {
             return (
@@ -71,17 +69,12 @@ export default function Posts({ postsCollection, currentUser }) {
           <p className="text-center text-2xl">No Posts Yet</p>
         ) : (
           <Skeleton
-            count={9}
-            height={400}
-            width={320}
-            className="col-span-1 flex"
+            count={4}
+            height={200}
+            className="mb-6 flex w-full md:w-4/5 m-auto"
           />
         )}
       </div>
-
-      {/* {posts?.length === 0 && (
-        <p className="text-center text-2xl">No Posts Yet</p>
-      )} */}
     </div>
   );
 }
