@@ -45,7 +45,7 @@ export default function Photos({ postsCollection, currentUser }) {
         <span className="uppercase">quotes</span>
       </span>
 
-      <div className="mb-8 w-4/5 m-auto">
+      <div className="mb-8 w-full md:w-4/5 m-auto">
         {!posts ? (
           <Skeleton
             count={9}

@@ -8,7 +8,7 @@ export default function Sidebar() {
   } = useUser();
 
   return (
-    <aside className="p-4 col-span-1 h-screen sticky top-20 md:inline">
+    <aside className="p-4 col-span-2 md:col-span-1 h-screen sticky top-20 md:inline">
       <User username={username} fullName={fullName} />
       <Suggestions
         userId={userId}

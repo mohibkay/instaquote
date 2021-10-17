@@ -56,7 +56,7 @@ export default function Header({
         {!profileUsername ? (
           <div className="rounded-full w-40 h-10 bg-gray-primary p-20" />
         ) : (
-          <div className="uppercase bg-blue-medium h-24 w-24 text-center px-2 rounded-full text-5xl text-white font-bold flex justify-center items-center">
+          <div className="uppercase bg-blue-medium h-20 w-20 md:h-24 md:w-24 text-center px-2 rounded-full text-5xl text-white font-bold flex justify-center items-center">
             <p>{profileUsername?.[0]}</p>
           </div>
         )}
