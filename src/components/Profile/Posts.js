@@ -52,7 +52,7 @@ export default function Posts({ postsCollection, currentUser }) {
         <span className="uppercase">quotes</span>
       </span>
 
-      <div className="mb-6 w-full md:w-4/5 m-auto">
+      <div className="mb-6 w-full md:w-4/5 m-auto px-4 md:px-0">
         {posts?.length > 0 ? (
           posts.map((photo) => {
             return (

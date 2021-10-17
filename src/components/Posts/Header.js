@@ -21,14 +21,8 @@ export default function Header({
   const allowMount = currentUser === username;
 
   return (
-    <div className="flex justify-between items-start border-gray-primary h-4 px-3 py-5 pt-7">
+    <div className="flex justify-between items-start border-gray-primary h-4 px-3 py-5 pt-4">
       <Link to={`/p/${username}`} className="flex items-center space-x-4">
-        {/* <img
-          src={`/images/avatars/${username}.jpg`}
-          alt={`${username} profile`}
-          className="rounded-full w-8 h-8"
-        /> */}
-
         <div className="uppercase bg-blue-medium h-6 w-6 text-center px-2 rounded-full text-sm text-white font-bold ml-2 flex justify-center items-center">
           <p>{username?.[0]}</p>
         </div>

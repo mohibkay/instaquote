@@ -29,7 +29,7 @@ export default function Post({
   const [totalComments, setTotalComments] = useState(comments.length);
 
   return (
-    <div className="bg-white border-t border-b md:border border-gray-primary rounded mb-12">
+    <div className="bg-white border border-gray-primary rounded mb-12">
       <Header
         username={username}
         fullName={fullName}
