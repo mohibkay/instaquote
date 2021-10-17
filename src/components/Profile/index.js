@@ -17,9 +17,13 @@ export default function UserProfile({ user }) {
     initialState
   );
 
+  const {
+    user: { username: currentUser, userId: currentUserId },
+  } = useUser();
+
   useEffect(() => {
     async function getProfileInfoAndPosts() {
-      const photos = await getUserPostsByUserId(user.userId);
+      const photos = await getUserPostsByUserId(user.userId, currentUserId);
       dispatch({
         profile: user,
         postsCollection: photos,
@@ -27,11 +31,7 @@ export default function UserProfile({ user }) {
       });
     }
     getProfileInfoAndPosts();
-  }, [user]);
-
-  const {
-    user: { username: currentUser },
-  } = useUser();
+  }, [currentUserId, user]);
 
   return (
     <>
@@ -41,11 +41,7 @@ export default function UserProfile({ user }) {
         followerCount={followerCount}
         setFollowerCount={dispatch}
       />
-      <Posts
-        postsCollection={postsCollection}
-        username={user.username}
-        currentUser={currentUser}
-      />
+      <Posts postsCollection={postsCollection} currentUser={currentUser} />
     </>
   );
 }
