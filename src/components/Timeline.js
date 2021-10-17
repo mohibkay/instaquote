@@ -9,11 +9,10 @@ export default function Timeline({ photos }) {
   const [posts, setPosts] = useState(photos);
 
   useEffect(() => {
-    if (photos?.length) {
+    if (photos) {
       setPosts(photos);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [photos?.length]);
+  }, [photos]);
 
   const {
     user: { fullName, username, userId },
@@ -67,7 +66,7 @@ export default function Timeline({ photos }) {
           />
         ))
       ) : (
-        <p className="text-center text-2xl">Follow people to see photos</p>
+        <p className="text-center text-2xl">Follow people to see quotes</p>
       )}
     </div>
   );
