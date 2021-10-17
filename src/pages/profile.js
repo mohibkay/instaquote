@@ -23,11 +23,15 @@ export default function Profile() {
     checkUserExists();
   }, [history, username]);
 
+  useEffect(() => {
+    document.title = `${username} - InstaQuote`;
+  }, [username]);
+
   return user?.username ? (
     <div className="bg-gray-background">
       <Header />
       <div className="mx-auto max-w-screen-lg">
-        <UserProfile user={user} />
+        <UserProfile user={user} loggedInUserLikedPhoto={""} />
       </div>
     </div>
   ) : (
