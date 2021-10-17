@@ -3,7 +3,6 @@ import Skeleton from "react-loading-skeleton";
 import useUser from "../customHooks/useUser";
 import CreatePost from "./CreatePost";
 import Post from "./Posts";
-import { firebase } from "../lib/firebase";
 import { deleteUserPost, updateUserPost } from "../services/firebase";
 
 export default function Timeline({ photos }) {
