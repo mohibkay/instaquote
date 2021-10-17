@@ -4,7 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import { deleteUserPost, updateUserPost } from "../../services/firebase";
 import Post from "../Posts";
 
-export default function Photos({ postsCollection, currentUser }) {
+export default function Posts({ postsCollection, currentUser }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -76,6 +76,6 @@ export default function Photos({ postsCollection, currentUser }) {
   );
 }
 
-Photos.propTypes = {
-  posts: PropTypes.array.isRequired,
+Posts.propTypes = {
+  posts: PropTypes.array,
 };
