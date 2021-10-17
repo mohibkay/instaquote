@@ -108,17 +108,31 @@ export async function getFollowedUserPhotos(userId, following) {
   return photosWithUserDetails;
 }
 
-export async function getUserPostsByUserId(userId) {
+export async function getUserPostsByUserId(userId, loggedInUserId) {
   const result = await firebase
     .firestore()
     .collection("photos")
     .where("userId", "==", userId)
     .get();
 
-  return result.docs.map((item) => ({
+  const userPostsByUserId = result.docs.map((item) => ({
     ...item.data(),
     docId: item.id,
   }));
+
+  const userPostsWithDetails = await Promise.all(
+    userPostsByUserId.map(async (post) => {
+      let loggedInUserLikedPhoto = false;
+      if (post.likes.includes(loggedInUserId)) {
+        loggedInUserLikedPhoto = true;
+      }
+      const [{ username }] = await getUserByUserId(post.userId);
+
+      return { username, ...post, loggedInUserLikedPhoto };
+    })
+  );
+
+  return userPostsWithDetails;
 }
 
 export async function isUserFollowingProfile(
