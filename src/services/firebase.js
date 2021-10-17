@@ -159,3 +159,14 @@ export async function toggleFollow(
     isFollowingProfile
   );
 }
+
+export async function deleteUserPost(postId) {
+  await firebase.firestore().collection("photos").doc(postId).delete();
+}
+
+export async function updateUserPost(postId, post) {
+  await firebase.firestore().collection("photos").doc(postId).update({
+    caption: post,
+    dateCreated: Date.now(),
+  });
+}

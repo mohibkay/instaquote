@@ -4,6 +4,7 @@ import useUser from "../customHooks/useUser";
 import CreatePost from "./CreatePost";
 import Post from "./Posts";
 import { firebase } from "../lib/firebase";
+import { deleteUserPost, updateUserPost } from "../services/firebase";
 
 export default function Timeline({ photos }) {
   const [posts, setPosts] = useState(photos);
@@ -19,9 +20,9 @@ export default function Timeline({ photos }) {
     user: { fullName, username, userId },
   } = useUser();
 
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = async (postId) => {
     try {
-      firebase.firestore().collection("photos").doc(postId).delete();
+      await deleteUserPost(postId);
       const updatedPosts = posts.filter((post) => post.docId !== postId);
       setPosts(updatedPosts);
     } catch (error) {
@@ -31,11 +32,7 @@ export default function Timeline({ photos }) {
 
   const handleUpdatePost = async (postId, post) => {
     try {
-      await firebase.firestore().collection("photos").doc(postId).update({
-        caption: post,
-        dateCreated: Date.now(),
-      });
-
+      await updateUserPost(postId, post);
       const restOfThePosts = posts.filter((post) => post.docId !== postId);
       const postToUpdate = posts.find((post) => post.docId === postId);
       const updatedPost = {

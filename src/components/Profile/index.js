@@ -3,6 +3,7 @@ import Header from "./Header";
 import Posts from "./Posts";
 import PropTypes from "prop-types";
 import { getUserPostsByUserId } from "../../services/firebase";
+import useUser from "../../customHooks/useUser";
 
 export default function UserProfile({ user }) {
   const reducer = (state, newState) => ({ ...state, ...newState });
@@ -28,6 +29,10 @@ export default function UserProfile({ user }) {
     getProfileInfoAndPosts();
   }, [user]);
 
+  const {
+    user: { username: currentUser },
+  } = useUser();
+
   return (
     <>
       <Header
@@ -36,7 +41,11 @@ export default function UserProfile({ user }) {
         followerCount={followerCount}
         setFollowerCount={dispatch}
       />
-      <Posts posts={postsCollection} username={user.username} />
+      <Posts
+        postsCollection={postsCollection}
+        username={user.username}
+        currentUser={currentUser}
+      />
     </>
   );
 }
