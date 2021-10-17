@@ -45,7 +45,7 @@ export default function Timeline({ photos }) {
   };
 
   return (
-    <div className="container col-span-3 md:col-span-2">
+    <div className="col-span-3 md:col-span-2">
       <CreatePost
         fullName={fullName}
         username={username}
