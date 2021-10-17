@@ -26,7 +26,7 @@ export default function Header({
         <div className="uppercase bg-blue-medium h-6 w-6 text-center px-2 rounded-full text-sm text-white font-bold ml-2 flex justify-center items-center">
           <p>{username?.[0]}</p>
         </div>
-        <p className="font-bold">{username}</p>
+        <p className="text-xl font-semibold">{username}</p>
       </Link>
 
       <MountFor allowMount={allowMount}>
