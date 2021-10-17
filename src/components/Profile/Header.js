@@ -88,7 +88,7 @@ export default function Header({
                 {followerCount === 1 ? "follower" : "followers"}
               </p>
               <p className="col-span-1">
-                <span className="font-bold mr-2">{following.length}</span>{" "}
+                <span className="font-bold mr-2">{following.length - 1}</span>{" "}
                 following
               </p>
             </div>

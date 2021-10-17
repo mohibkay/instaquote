@@ -1,15 +1,22 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Skeleton from "react-loading-skeleton";
 import { deleteUserPost, updateUserPost } from "../../services/firebase";
 import Post from "../Posts";
 
 export default function Posts({ postsCollection, currentUser }) {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (postsCollection?.length) {
-      setPosts(postsCollection);
+    if (isMounted.current) {
+      if (postsCollection.length) {
+        setPosts(postsCollection);
+      } else {
+        setPosts([]);
+      }
+    } else {
+      isMounted.current = true;
     }
   }, [postsCollection]);
 
@@ -39,6 +46,8 @@ export default function Posts({ postsCollection, currentUser }) {
     }
   };
 
+  console.log(posts);
+
   return (
     <div className="border-t border-gray-primary mt-10">
       <span className="flex justify-center my-3 items-center space-x-1">
@@ -46,14 +55,7 @@ export default function Posts({ postsCollection, currentUser }) {
       </span>
 
       <div className="mb-8 w-full md:w-4/5 m-auto">
-        {!posts ? (
-          <Skeleton
-            count={9}
-            height={400}
-            width={320}
-            className="col-span-1 flex"
-          />
-        ) : posts.length > 0 ? (
+        {posts?.length > 0 ? (
           posts.map((photo) => {
             return (
               <Post
@@ -65,13 +67,21 @@ export default function Posts({ postsCollection, currentUser }) {
               />
             );
           })
-        ) : null}
+        ) : posts ? (
+          <p className="text-center text-2xl">No Posts Yet</p>
+        ) : (
+          <Skeleton
+            count={9}
+            height={400}
+            width={320}
+            className="col-span-1 flex"
+          />
+        )}
       </div>
 
-      {!posts ||
-        (posts.length === 0 && (
-          <p className="text-center text-2xl">No Posts Yet</p>
-        ))}
+      {/* {posts?.length === 0 && (
+        <p className="text-center text-2xl">No Posts Yet</p>
+      )} */}
     </div>
   );
 }
