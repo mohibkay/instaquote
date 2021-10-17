@@ -6,8 +6,6 @@ import Header from "./Header";
 import Actions from "./Actions";
 import Comments from "./Comments";
 import Content from "./Content";
-// import Image from "./Image";
-// import Footer from "./Footer";
 
 export default function Post({
   content,
@@ -20,7 +18,6 @@ export default function Post({
     fullName,
     docId,
     caption,
-    // imageSrc,
     likes,
     comments,
     loggedInUserLikedPhoto,
@@ -57,8 +54,6 @@ export default function Post({
         commentInput={commentInput}
         setTotalComments={setTotalComments}
       />
-      {/* <Image src={imageSrc} caption={caption} /> */}
-      {/* <Footer username={username} caption={caption} /> */}
     </div>
   );
 }
@@ -69,7 +64,6 @@ Post.propTypes = {
     userId: PropTypes.string.isRequired,
     docId: PropTypes.string.isRequired,
     caption: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
     likes: PropTypes.array.isRequired,
     comments: PropTypes.array.isRequired,
     loggedInUserLikedPhoto: PropTypes.bool.isRequired,
