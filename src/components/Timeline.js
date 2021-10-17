@@ -54,11 +54,7 @@ export default function Timeline({ photos }) {
         setPosts={setPosts}
       />
       {!posts ? (
-        <Skeleton
-          count={4}
-          height={500}
-          className="mb-5 col-span-3 md:col-span-2"
-        />
+        <Skeleton count={4} className="mb-5 h-60 col-span-3 md:col-span-2" />
       ) : posts?.length > 0 ? (
         posts.map((content) => (
           <Post
