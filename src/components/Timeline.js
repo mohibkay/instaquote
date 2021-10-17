@@ -3,25 +3,24 @@ import Skeleton from "react-loading-skeleton";
 import useUser from "../customHooks/useUser";
 import CreatePost from "./CreatePost";
 import Post from "./Posts";
-import { firebase } from "../lib/firebase";
+import { deleteUserPost, updateUserPost } from "../services/firebase";
 
 export default function Timeline({ photos }) {
   const [posts, setPosts] = useState(photos);
 
   useEffect(() => {
-    if (photos?.length) {
+    if (photos) {
       setPosts(photos);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [photos?.length]);
+  }, [photos]);
 
   const {
     user: { fullName, username, userId },
   } = useUser();
 
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = async (postId) => {
     try {
-      firebase.firestore().collection("photos").doc(postId).delete();
+      await deleteUserPost(postId);
       const updatedPosts = posts.filter((post) => post.docId !== postId);
       setPosts(updatedPosts);
     } catch (error) {
@@ -31,11 +30,7 @@ export default function Timeline({ photos }) {
 
   const handleUpdatePost = async (postId, post) => {
     try {
-      await firebase.firestore().collection("photos").doc(postId).update({
-        caption: post,
-        dateCreated: Date.now(),
-      });
-
+      await updateUserPost(postId, post);
       const restOfThePosts = posts.filter((post) => post.docId !== postId);
       const postToUpdate = posts.find((post) => post.docId === postId);
       const updatedPost = {
@@ -50,7 +45,7 @@ export default function Timeline({ photos }) {
   };
 
   return (
-    <div className="container col-span-3 md:col-span-2">
+    <div className="col-span-3 md:col-span-2">
       <CreatePost
         fullName={fullName}
         username={username}
@@ -59,7 +54,11 @@ export default function Timeline({ photos }) {
         setPosts={setPosts}
       />
       {!posts ? (
-        <Skeleton count={4} height={500} width={640} className="mb-5" />
+        <Skeleton
+          count={4}
+          height={500}
+          className="mb-5 col-span-3 md:col-span-2"
+        />
       ) : posts?.length > 0 ? (
         posts.map((content) => (
           <Post
@@ -71,7 +70,7 @@ export default function Timeline({ photos }) {
           />
         ))
       ) : (
-        <p className="text-center text-2xl">Follow people to see photos</p>
+        <p className="text-center text-2xl">Follow people to see quotes</p>
       )}
     </div>
   );

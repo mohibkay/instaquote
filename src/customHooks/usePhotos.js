@@ -20,7 +20,7 @@ export default function usePhotos() {
       setPhotos(followedUserPhotos);
     }
 
-    getTimelinePhotos(); //TODO: find out why we didnt need condition to check userId exits
+    getTimelinePhotos();
   }, [userId]);
 
   return { photos };

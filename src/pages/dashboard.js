@@ -12,9 +12,9 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="">
+    <div className="m-0 p-0">
       <Header />
-      <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
+      <div className="grid grid-cols-3 gap-0 md:gap-4 justify-between md:mx-auto max-w-screen-lg">
         <Timeline photos={photos} />
         <Sidebar />
       </div>

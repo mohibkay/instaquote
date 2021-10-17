@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { firebase } from "../../lib/firebase";
+import {
+  getFollowedUserPhotos,
+  getUserByUserId,
+} from "../../services/firebase";
 
-export default function CreatePost({
-  fullName,
-  username,
-  userId,
-  posts,
-  setPosts,
-}) {
+export default function CreatePost({ fullName, userId, setPosts }) {
   const [text, setText] = useState();
+
+  async function getTimelinePosts() {
+    const [{ following }] = await getUserByUserId(userId);
+    let followedUserPosts = [];
+
+    if (following?.length > 0) {
+      followedUserPosts = await getFollowedUserPhotos(userId, following);
+    }
+    followedUserPosts.sort((a, b) => b.dateCreated - a.dateCreated);
+    setPosts(followedUserPosts);
+  }
 
   const handleCreatePost = () => {
     const postObj = {
@@ -20,11 +29,11 @@ export default function CreatePost({
       dateCreated: Date.now(),
     };
 
-    setPosts([{ ...postObj, username }, ...posts]);
-    setText("");
-
     try {
       firebase.firestore().collection("photos").add(postObj);
+
+      setText("");
+      getTimelinePosts();
     } catch (error) {
       console.log(error.message);
     }

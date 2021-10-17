@@ -107,3 +107,80 @@ export async function getFollowedUserPhotos(userId, following) {
 
   return photosWithUserDetails;
 }
+
+export async function getUserPostsByUserId(userId, loggedInUserId) {
+  const result = await firebase
+    .firestore()
+    .collection("photos")
+    .where("userId", "==", userId)
+    .get();
+
+  const userPostsByUserId = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+
+  const userPostsWithDetails = await Promise.all(
+    userPostsByUserId.map(async (post) => {
+      let loggedInUserLikedPhoto = false;
+      if (post.likes.includes(loggedInUserId)) {
+        loggedInUserLikedPhoto = true;
+      }
+      const [{ username }] = await getUserByUserId(post.userId);
+
+      return { username, ...post, loggedInUserLikedPhoto };
+    })
+  );
+
+  return userPostsWithDetails;
+}
+
+export async function isUserFollowingProfile(
+  loggedInUserUsername,
+  profileUserId
+) {
+  const result = await firebase
+    .firestore()
+    .collection("users")
+    .where("username", "==", loggedInUserUsername)
+    .where("following", "array-contains", profileUserId)
+    .get();
+
+  const [response = {}] = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id,
+  }));
+
+  return response.userId;
+}
+
+export async function toggleFollow(
+  isFollowingProfile,
+  loggedInUserDocId,
+  profileUserId,
+  profileDocId,
+  loggedInUserId
+) {
+  await updateLoggedInUserFollowing(
+    loggedInUserDocId,
+    profileUserId,
+    isFollowingProfile
+  );
+
+  await updateFollowedUserFollowers(
+    profileDocId,
+    loggedInUserId,
+    isFollowingProfile
+  );
+}
+
+export async function deleteUserPost(postId) {
+  await firebase.firestore().collection("photos").doc(postId).delete();
+}
+
+export async function updateUserPost(postId, post) {
+  await firebase.firestore().collection("photos").doc(postId).update({
+    caption: post,
+    dateCreated: Date.now(),
+  });
+}
