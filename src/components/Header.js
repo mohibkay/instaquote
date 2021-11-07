@@ -4,7 +4,7 @@ import FirebaseContext from "../context/firebase";
 import UserContext from "../context/user";
 import { ROUTES } from "../constants";
 
-export default function Header() {
+const Header = () => {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
   const history = useHistory();
@@ -102,4 +102,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
