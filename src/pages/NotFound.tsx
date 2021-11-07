@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function NotFound() {
+const NotFound: React.FC = () => {
   useEffect(() => {
     document.title = "Not Found - InstaQuote";
   }, []);
@@ -11,4 +11,6 @@ export default function NotFound() {
       <h1 className="text-blue-medium text-4xl font-bold">Page Not Found</h1>
     </div>
   );
-}
+};
+
+export default NotFound;
