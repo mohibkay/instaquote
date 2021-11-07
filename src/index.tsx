@@ -6,6 +6,7 @@ import FirebaseContext from "./context/firebase";
 import { firebase, FieldValue } from "./lib/firebase";
 
 ReactDOM.render(
+  // @ts-ignore TODO: fix Provider context type
   <FirebaseContext.Provider value={{ firebase, FieldValue }}>
     <App />
   </FirebaseContext.Provider>,
