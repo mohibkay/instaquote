@@ -5,6 +5,8 @@ import { ROUTES } from "../../constants";
 
 interface RouteProps {
   component: React.ComponentType<RouteComponentProps>;
+  exact?: boolean;
+  path: string;
 }
 
 const ProtectedRoute: React.FC<RouteProps> = ({
