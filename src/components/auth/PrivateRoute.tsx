@@ -1,9 +1,17 @@
 import { useContext } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import userContext from "../../context/user";
 import { ROUTES } from "../../constants";
 
-export default function ProtectedRoute({ component: Component, ...rest }) {
+interface RouteProps {
+  component: React.ComponentType<RouteComponentProps>;
+}
+
+const ProtectedRoute: React.FC<RouteProps> = ({
+  component: Component,
+  ...rest
+}) => {
+  // @ts-ignore TODO: fix user context types
   const { user } = useContext(userContext);
 
   return (
@@ -14,4 +22,6 @@ export default function ProtectedRoute({ component: Component, ...rest }) {
       }
     />
   );
-}
+};
+
+export default ProtectedRoute;
