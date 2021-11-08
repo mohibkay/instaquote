@@ -4,8 +4,9 @@ import FirebaseContext from "../context/firebase";
 import { ROUTES, CREDENTIALS } from "../constants";
 import Header from "../components/Header";
 
-export default function Login() {
+const Login: React.FC = () => {
   const history = useHistory();
+  // @ts-ignore TODO: fix user context types
   const { firebase } = useContext(FirebaseContext);
 
   const [email, setEmail] = useState("");
@@ -14,12 +15,12 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const isInvalid = password === "" || email === "";
 
-  const login = async (email, password) => {
+  const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       history.push(ROUTES.DASHBOARD);
-    } catch (error) {
+    } catch (error: any) {
       setEmail("");
       setPassword("");
       setError(error.message);
@@ -28,7 +29,7 @@ export default function Login() {
     }
   };
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     login(email, password);
   };
@@ -118,4 +119,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

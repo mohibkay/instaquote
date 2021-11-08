@@ -5,8 +5,10 @@ import { ROUTES } from "../constants";
 import { doesUserNameExist } from "../services/firebase";
 import Header from "../components/Header";
 
-export default function Login() {
+const Login: React.FC = () => {
   const history = useHistory();
+  // @ts-ignore TODO: fix user context types
+
   const { firebase } = useContext(FirebaseContext);
 
   const [username, setUsername] = useState("");
@@ -16,7 +18,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const isInvalid = password === "" || email === "";
 
-  const handleSignup = async (event) => {
+  const handleSignup = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     const usernameExists = await doesUserNameExist(username);
 
@@ -44,7 +46,7 @@ export default function Login() {
           });
 
         history.push(ROUTES.DASHBOARD);
-      } catch (error) {
+      } catch (error: any) {
         setUsername("");
         setFullName("");
         setEmail("");
@@ -148,4 +150,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

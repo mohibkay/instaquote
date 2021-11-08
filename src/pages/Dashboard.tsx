@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Timeline from "../components/Timeline";
 import usePhotos from "../customHooks/usePhotos";
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
   const { photos } = usePhotos();
 
   useEffect(() => {
@@ -20,4 +20,6 @@ export default function Dashboard() {
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;
