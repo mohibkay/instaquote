@@ -16,7 +16,7 @@ export default function AddComment({
     user: { displayName },
   } = useContext(UserContext);
 
-  const isDisabled = !comment.trim();
+  const isInvalid = !comment.trim();
 
   const handleSubmitComment = (event) => {
     event.preventDefault();
@@ -52,10 +52,10 @@ export default function AddComment({
         />
         <button
           type="submit"
-          disabled={isDisabled}
+          disabled={isInvalid}
           onClick={handleSubmitComment}
           className={`text-sm text-blue-medium font-bold ${
-            isDisabled && "opacity-25 cursor-default"
+            isInvalid && "opacity-25 cursor-default"
           }`}
         >
           Comment
