@@ -8,6 +8,11 @@ import {
 
 export default function CreatePost({ fullName, userId, setPosts }) {
   const [text, setText] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const isInvalid = !text.trim();
+
+  console.log("isLoading");
+  console.log(isLoading);
 
   async function getTimelinePosts() {
     const [{ following }] = await getUserByUserId(userId);
@@ -21,6 +26,8 @@ export default function CreatePost({ fullName, userId, setPosts }) {
   }
 
   const handleCreatePost = () => {
+    setIsLoading(true);
+
     const postObj = {
       caption: text,
       comments: [],
@@ -36,6 +43,8 @@ export default function CreatePost({ fullName, userId, setPosts }) {
       getTimelinePosts();
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,10 +66,13 @@ export default function CreatePost({ fullName, userId, setPosts }) {
 
       <div className="w-full mt-4 ml-2">
         <button
+          disabled={isInvalid}
           onClick={handleCreatePost}
-          className="ml-auto bg-blue-medium text-white py-1 px-4 rounded mb-2"
+          className={`ml-auto bg-blue-medium text-white py-1 px-4 rounded mb-2 ${
+            isInvalid && "opacity-50 cursor-default"
+          }`}
         >
-          Post
+          {isLoading ? "Loading..." : "Post"}
         </button>
       </div>
     </div>
