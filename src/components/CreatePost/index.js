@@ -68,7 +68,7 @@ export default function CreatePost({ fullName, userId, setPosts }) {
           onClick={handleCreatePost}
           className={`ml-auto bg-blue-medium text-white py-1 px-4 rounded mb-2 w-24 ${
             isInvalid && "opacity-50 cursor-default"
-          } ${isLoading && "cursor-not-allowed"}`}
+          } ${isLoading && "opacity-75 cursor-not-allowed"}`}
         >
           {isLoading ? "Posting..." : "Post"}
         </button>
