@@ -7,7 +7,20 @@ import {
 } from "../../services/firebase";
 
 export default function CreatePost({ fullName, userId, setPosts }) {
-  const [text, setText] = useState();
+  const [text, setText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const isInvalid = !text.trim();
+
+  console.log("isLoading");
+  console.log(isLoading);
+
+  const postObj = {
+    caption: text,
+    comments: [],
+    likes: [],
+    userId: userId,
+    dateCreated: Date.now(),
+  };
 
   async function getTimelinePosts() {
     const [{ following }] = await getUserByUserId(userId);
@@ -18,21 +31,15 @@ export default function CreatePost({ fullName, userId, setPosts }) {
     }
     followedUserPosts.sort((a, b) => b.dateCreated - a.dateCreated);
     setPosts(followedUserPosts);
+    setText("");
+    setIsLoading(false);
   }
 
-  const handleCreatePost = () => {
-    const postObj = {
-      caption: text,
-      comments: [],
-      likes: [],
-      userId: userId,
-      dateCreated: Date.now(),
-    };
-
+  const handleCreatePost = async () => {
     try {
-      firebase.firestore().collection("photos").add(postObj);
+      setIsLoading(true);
+      await firebase.firestore().collection("photos").add(postObj);
 
-      setText("");
       getTimelinePosts();
     } catch (error) {
       console.log(error.message);
@@ -57,10 +64,13 @@ export default function CreatePost({ fullName, userId, setPosts }) {
 
       <div className="w-full mt-4 ml-2">
         <button
+          disabled={isInvalid || isLoading}
           onClick={handleCreatePost}
-          className="ml-auto bg-blue-medium text-white py-1 px-4 rounded mb-2"
+          className={`ml-auto bg-blue-medium text-white py-1 px-4 rounded mb-2 w-24 ${
+            isInvalid && "opacity-50 cursor-default"
+          } ${isLoading && "opacity-75 cursor-not-allowed"}`}
         >
-          Post
+          {isLoading ? "Posting..." : "Post"}
         </button>
       </div>
     </div>
