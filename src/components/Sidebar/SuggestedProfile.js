@@ -14,23 +14,25 @@ export default function SuggestedProfile({
   loggedInUserDocId,
 }) {
   const [followed, setFollowed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleFollowUser() {
-    setFollowed(true);
+    setIsLoading(true);
+    try {
+      await updateLoggedInUserFollowing(loggedInUserDocId, profileId, false);
 
-    await updateLoggedInUserFollowing(loggedInUserDocId, profileId, false);
-
-    await updateFollowedUserFollowers(profileDocId, userId, false);
+      await updateFollowedUserFollowers(profileDocId, userId, false);
+      setFollowed(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
-  return !followed ? (
+  return (
     <div className="flex justify-between items-center">
       <Link to={`/p/${username}`} className="flex items-center space-x-4">
-        {/* <img
-          src={`/images/avatars/${username}.jpg`}
-          alt={`${username} profile`}
-          className="h-8 w-8 rounded-full"
-        /> */}
         <div className="uppercase bg-blue-medium h-6 w-6 rounded-full text-sm text-white font-bold flex justify-center items-center">
           <p className="m-0">{username?.[0]}</p>
         </div>
@@ -41,10 +43,10 @@ export default function SuggestedProfile({
         className="text-blue-medium font-bold"
         onClick={handleFollowUser}
       >
-        Follow
+        {isLoading ? "Loading..." : followed ? "Unfollow" : "Follow"}
       </button>
     </div>
-  ) : null;
+  );
 }
 
 SuggestedProfile.propTypes = {
