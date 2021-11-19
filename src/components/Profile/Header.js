@@ -4,7 +4,7 @@ import useUser from "../../customHooks/useUser";
 import { isUserFollowingProfile, toggleFollow } from "../../services/firebase";
 import Skeleton from "react-loading-skeleton";
 
-export default function Header({
+const Header = ({
   photosCount,
   followerCount,
   setFollowerCount,
@@ -16,33 +16,49 @@ export default function Header({
     followers = [],
     following = [],
   },
-}) {
+}) => {
   const { user } = useUser();
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const activeFollowBtn = user?.username !== profileUsername;
 
   const handleToggleFollow = async () => {
+    setIsLoading(true);
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
     setFollowerCount({
       followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1,
     });
-    await toggleFollow(
-      isFollowingProfile,
-      user.docId,
-      profileUserId,
-      profileDocId,
-      user.userId
-    );
+
+    try {
+      await toggleFollow(
+        isFollowingProfile,
+        user.docId,
+        profileUserId,
+        profileDocId,
+        user.userId
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     const isLoggedInUserFollowingProfile = async () => {
-      const isFollowing = await isUserFollowingProfile(
-        user.username,
-        profileUserId
-      );
+      try {
+        setIsLoading(true);
+        const isFollowing = await isUserFollowingProfile(
+          user.username,
+          profileUserId
+        );
 
-      setIsFollowingProfile(isFollowing);
+        setIsFollowingProfile(isFollowing);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     if (user.username && profileUserId) {
@@ -75,7 +91,11 @@ export default function Header({
                   onClick={handleToggleFollow}
                   className="bg-blue-medium w-20 h-8 text-white font-semibold px-2 py-0.5 rounded"
                 >
-                  {isFollowingProfile ? "Unfollow" : "Follow"}
+                  {isLoading
+                    ? "Loading..."
+                    : isFollowingProfile
+                    ? "Unfollow"
+                    : "Follow"}
                 </button>
               )}
             </div>
@@ -98,7 +118,7 @@ export default function Header({
       </div>
     </div>
   );
-}
+};
 
 Header.propTypes = {
   photosCount: PropTypes.number.isRequired,
@@ -113,3 +133,5 @@ Header.propTypes = {
     following: PropTypes.array,
   }),
 };
+
+export default Header;
