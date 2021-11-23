@@ -11,9 +11,6 @@ export default function CreatePost({ fullName, userId, setPosts }) {
   const [isLoading, setIsLoading] = useState(false);
   const isInvalid = !text.trim();
 
-  console.log("isLoading");
-  console.log(isLoading);
-
   const postObj = {
     caption: text,
     comments: [],
@@ -42,7 +39,7 @@ export default function CreatePost({ fullName, userId, setPosts }) {
 
       getTimelinePosts();
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 
